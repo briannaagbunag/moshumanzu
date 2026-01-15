@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>moshumanzu</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- BACKGROUND -->
+<canvas id="ambient-canvas"></canvas>
+<script>
+const canvas = document.getElementById('ambient-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particles = [];
+const numParticles = 60;
+
+// Particle class
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 6 + 2;
+    this.speedX = Math.random() * 0.3 - 0.15; // slow movement
+    this.speedY = Math.random() * 0.3 - 0.15;
+    // Color: pink, white, or subtle red
+    const colors = ['rgba(255,140,199,0.3)', 'rgba(255,255,255,0.2)', 'rgba(255,60,60,0.15)'];
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+
+    // Wrap around edges
+    if(this.x > canvas.width) this.x = 0;
+    if(this.x < 0) this.x = canvas.width;
+    if(this.y > canvas.height) this.y = 0;
+    if(this.y < 0) this.y = canvas.height;
+  }
+
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+    ctx.fillStyle = this.color;
+    ctx.shadowColor = this.color;
+    ctx.shadowBlur = 10; // subtle glow
+    ctx.fill();
+  }
+}
+
+// Create particles
+for(let i = 0; i < numParticles; i++) {
+  particles.push(new Particle());
+}
+
+// Animation loop
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    p.update();
+    p.draw();
+  });
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+// Resize canvas on window resize
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+
+</script>
+
+<!-- PROFILE -->
+ 
+    <header class="profile, profilesection">
+            
+    <div class="profile-container">
+    <img src="profile.png" alt="moshumanzu" class="avatar">
+    <img src="butterfly.gif" alt="Butterfly" class="butterfly-gif">
+    </div>
+
+    <h1 class="name">Moshu</h1>
+
+    <p class="tagline">@moshumanzu</p>
+
+  <!-- SOCIAL ICONS -->
+    <div class="socials">
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/moshumanzu" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="32" height="32" fill="currentColor">
+        <path d="M349.33 69.33H162.67C112.98 69.33 69.33 112.98 69.33 162.67v186.66c0 49.69 43.65 93.34 93.34 93.34h186.66c49.69 0 93.34-43.65 93.34-93.34V162.67c0-49.69-43.65-93.34-93.34-93.34zM464 349.33c0 63.15-51.52 114.67-114.67 114.67H162.67C99.52 464 48 412.48 48 349.33V162.67C48 99.52 99.52 48 162.67 48h186.66C412.48 48 464 99.52 464 162.67v186.66z"/>
+        <path d="M256 164.4a91.6 91.6 0 1 0 0 183.2 91.6 91.6 0 0 0 0-183.2zm0 150.53a58.93 58.93 0 1 1 0-117.87 58.93 58.93 0 0 1 0 117.87z"/>
+        <circle cx="390.67" cy="121.33" r="21.33"/>
+        </svg>
+    </a>
+
+     <!-- TikTok -->
+    <a href="https://www.tiktok.com/@moshumanzu" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+        <img src="tik-tok.png" alt="TikTok" class="social-icon">
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://www.youtube.com/@moshumanzu" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="32" height="32" fill="currentColor">
+        <path d="M549.655 124.083c-6.281-23.733-24.832-42.335-48.576-48.626C456.83 64 288 64 288 64s-168.83 0-213.079 11.457c-23.744 6.291-42.295 24.893-48.576 48.626C16 168.15 16 256 16 256s0 87.85 10.345 131.917c6.281 23.733 24.832 42.335 48.576 48.626C119.17 448 288 448 288 448s168.83 0 213.079-11.457c23.744-6.291 42.295-24.893 48.576-48.626C560 343.85 560 256 560 256s0-87.85-10.345-131.917zM232 334V178l142 78-142 78z"/>
+        </svg>
+    </a>
+    
+    <!-- Discord -->
+    <span class="discord" id="discord">
+      <img src="discord.png" alt="Discord" class="icon">
+      <span class="discord-text">moshumanzu</span>
+    </span>
+  
+
+  <script>
+    // Wait until the DOM is fully loaded
+    document.addEventListener("DOMContentLoaded", () => {
+      const discord = document.getElementById('discord');
+
+      discord.addEventListener('click', () => {
+        discord.classList.toggle('show-text');
+      });
+    });
+
+    const socialsWithDiscord = document.querySelectorAll('.socials a, .discord');
+
+    socialsWithDiscord.forEach(icon => {
+    icon.addEventListener('mouseenter', (e) => {
+        for(let i=0; i<5; i++){
+        const spark = document.createElement('div');
+        spark.className = 'spark';
+        spark.style.setProperty('--dx', `${Math.random()*20-10}px`);
+        spark.style.setProperty('--dy', `${Math.random()*20-10}px`);
+        icon.appendChild(spark);
+        setTimeout(() => spark.remove(), 600);
+        }
+    });
+    });
+
+
+  </script>
+
+  </div>
+
+
+<!-- BEAUTY / CREATOR -->
+<section id="beauty" class="section">
+  <h2>Creator Codes</h2>
+
+  <div class="beautycards">
+    <div class="card highlight">
+    <div class="beautycard" data-bg="yesstyle.jpg">
+      <h3>YesStyle Influencer</h3>
+      <a href="https://www.yesstyle.com/en/home.html?rco=MOSHU87000&utm_term=MOSHU87000&utm_medium=Influencer&utm_source=dynamic&mcg=influencer" class="button">Code: MOSHU87000</a>
+      <a href="https://www.yesstyle.com/en/influencers.html?irirco=MOSHU87000&utm_term=MOSHU87000&utm_medium=infreferral&mcg=influencer&utm_source=influencer&utm_campaign=iriprivate" class="button">Be a YesStyle Influencer ✨</a>
+    </div>
+    </div>
+
+    <div class="beautycard" data-bg="flowerknows.jpg">
+      <h3>Flower Knows</h3>
+      <a href="https://flowerknows.co/?ref=MOSHU87000" class="button">Code: MOSHU87000</a>
+    </div>
+
+    <div class="beautycard" data-bg="shein.jpg">
+      <h3>Shein</h3>
+      <a href="https://ph.shein.com/ark/10830?test=5051&url_from=affiliate_koc_4014335675&scene=1&ad_type=KOC&language=en&siteuid=ph&version_bid=101804616,101804641&version_eid=100693341&landing_page_id=10830&ad_test_id=45475&campaign=picklist&koc_id=4014335675&picks_delivery_id=2412620&requestId=olw-5dbsviidw70k&tv_b=2&behaviorId=picklist.f7ac6599-7c83-4cf6-b6db-9ae1a4dbdd01&onelink=12/4p5fa4s91mcz&campaign_id=540" class="button">Collection code: 63HRV</a>
+    </div>
+</div>
+</section>
+
+
+<!-- GAMING -->
+<section id="gaming" class="section">
+  <h2>Gaming Profiles</h2>
+
+  <div class="gamecards">
+    <div class="gamecard" data-bg="genshin.jpg">
+    <h3>Genshin Impact</h3>
+    <p><strong>UID:</strong> 812241858</p>
+    <p><strong>Server:</strong> Asia</p>
+    <a 
+        href="https://enka.network/u/812241858/" 
+        class="button" 
+        target="_blank" 
+        rel="noopener noreferrer"
+    >
+        View Showcase
+    </a>
+    </div>
+
+    <div class="gamecard" data-bg="valorant.jpg">
+    <h3>Valorant</h3>
+    <p><strong>Riot ID:</strong> moshu#manzu</p>
+    <p><strong>Platform:</strong> PC/PlayStation</p>
+    <a 
+        href="https://tracker.gg/valorant/profile/riot/moshu%23manzu/overview?platform=pc&playlist=competitive&season=4c4b8cff-43eb-13d3-8f14-96b783c90cd2"
+        class="button"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        Tracker Profile
+    </a>
+    </div>
+
+    <div class="gamecard" data-bg="mlbb.jpg">
+      <h3>Mobile Legends (MLBB)</h3>
+      <p><strong>ID:</strong> 394809336(3818)</p>
+      <p><strong>IGN:</strong> Moshu</p>
+    </div>
+
+    <div class="gamecard" data-bg="naraka.jpg">
+      <h3>Naraka: Bladepoint</h3>
+      <p><strong>ID:</strong> 1264200110178</p>
+      <p><strong>IGN:</strong> umochz</p>
+      <p><strong>Platform:</strong> PlayStation</p>
+    </div>
+
+    <div class="gamecard" data-bg="asphalt.jpg">
+      <h3>Asphalt Legends</h3>
+      <p><strong>ID:</strong> u-02d731</p>
+      <p><strong>IGN:</strong> moshumanzu</p>
+      <p><strong>Platform:</strong> PlayStation</p>
+    </div>
+
+  </div>
+</section>
+
+<script>
+      document.querySelectorAll('.beautycard, .gamecard').forEach(card => {
+        const bg = card.dataset.bg;
+        if (bg) {
+          card.style.setProperty('--card-bg', `url(${bg})`);
+        }
+
+        card.addEventListener('click', e => {
+          // allow buttons/links to still work
+          if (e.target.closest('a')) return;
+
+          // close others
+          document.querySelectorAll('.active').forEach(c => {
+            if (c !== card) c.classList.remove('active');
+          });
+
+          card.classList.toggle('active');
+        });
+      });
+    </script>
+
+</body>
+</html>
