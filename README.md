@@ -1,4 +1,4 @@
-# MoshuManzu Profile Site
+# Moshu Profile Card
 
 This repository hosts a basic card profile with creator codes, gaming profiles, and socials.  
 
