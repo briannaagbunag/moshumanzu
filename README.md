@@ -1,6 +1,6 @@
 # MoshuManzu Profile Site
 
-This repository hosts soc med profile with creator codes, gaming profiles, and socials.  
+This repository hosts a basic card profile with creator codes, gaming profiles, and socials.  
 
 ## Features
 - Animated background particles
