@@ -10,74 +10,6 @@
 
 <!-- BACKGROUND -->
 <canvas id="ambient-canvas"></canvas>
-<script>
-const canvas = document.getElementById('ambient-canvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const particles = [];
-const numParticles = 60;
-
-// Particle class
-class Particle {
-  constructor() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 6 + 2;
-    this.speedX = Math.random() * 0.3 - 0.15; // slow movement
-    this.speedY = Math.random() * 0.3 - 0.15;
-    // Color: pink, white, or subtle red
-    const colors = ['rgba(255,140,199,0.3)', 'rgba(255,255,255,0.2)', 'rgba(255,60,60,0.15)'];
-    this.color = colors[Math.floor(Math.random() * colors.length)];
-  }
-
-  update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-
-    // Wrap around edges
-    if(this.x > canvas.width) this.x = 0;
-    if(this.x < 0) this.x = canvas.width;
-    if(this.y > canvas.height) this.y = 0;
-    if(this.y < 0) this.y = canvas.height;
-  }
-
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-    ctx.fillStyle = this.color;
-    ctx.shadowColor = this.color;
-    ctx.shadowBlur = 10; // subtle glow
-    ctx.fill();
-  }
-}
-
-// Create particles
-for(let i = 0; i < numParticles; i++) {
-  particles.push(new Particle());
-}
-
-// Animation loop
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach(p => {
-    p.update();
-    p.draw();
-  });
-  requestAnimationFrame(animate);
-}
-
-animate();
-
-// Resize canvas on window resize
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-
-
-</script>
 
 <!-- PROFILE -->
  
@@ -101,6 +33,13 @@ window.addEventListener('resize', () => {
             <path d="M502.3 190.8L327.4 338c-15.6 13.1-38.2 13.1-53.8 0L9.7 190.8C3.9 186.1 0 178.9 0 171.2V112c0-26.5 21.5-48 48-48h416c26.5 0 48 21.5 48 48v59.2c0 7.7-3.9 14.9-9.7 19.6zM0 222.4l183.6 154.3c37.5 31.5 91.3 31.5 128.8 0L512 222.4V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V222.4z"/>
         </svg>
     </a>
+
+    <!-- Facebook -->
+    <a href="https://www.facebook.com/profile.php?id=61590633911947" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="32" height="32" fill="currentColor">
+        <path d="M279.14 288l14.22-92.66h-88.91V127.83c0-25.35 12.42-50.06 52.24-50.06H293V6.26S259.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72V195.3H22.89V288h81.39v224h100.17V288z"/>
+      </svg>
+    </a>
     
       <!-- Instagram -->
     <a href="https://www.instagram.com/moshumanzu" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -113,7 +52,9 @@ window.addEventListener('resize', () => {
 
      <!-- TikTok -->
     <a href="https://www.tiktok.com/@moshumanzu" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-        <img src="tik-tok.png" alt="TikTok" class="social-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="currentColor">
+          <path d="M448,209.9a210.1,210.1,0,0,1-122.8-39.2v178.7A162.6,162.6,0,1,1,162.6,186.8v89.1a74.8,74.8,0,1,0,52.4,71.5V0h88.2a121.2,121.2,0,0,0,1.9,22.2A122.2,122.2,0,0,0,448,142.4Z"/>
+      </svg>
     </a>
 
     <!-- YouTube -->
@@ -125,53 +66,31 @@ window.addEventListener('resize', () => {
     
     <!-- Discord -->
     <span class="discord" id="discord">
-      <img src="discord.png" alt="Discord" class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="32" height="32" fill="currentColor">
+        <path d="M524.5 69.8a485.1 485.1 0 0 0-126.8-39.5 337.5 337.5 0 0 0-16 32.4 447.8 447.8 0 0 0-133.4 0 337.5 337.5 0 0 0-16-32.4A485.1 485.1 0 0 0 115.5 69.8C39.5 181.6 24.3 290.3 31.6 397.6a489.6 489.6 0 0 0 151.2 77.1 372.1 372.1 0 0 0 32.5-52.7 317.6 317.6 0 0 1-51.9-24.9c4.4-3.3 8.6-6.8 12.7-10.5a348.3 348.3 0 0 0 296.2 0c4.1 3.7 8.3 7.2 12.7 10.5a317.6 317.6 0 0 1-51.9 24.9 372.1 372.1 0 0 0 32.5 52.7 489.6 489.6 0 0 0 151.2-77.1c8.6-124.3-14.7-232.1-84.5-327.8zM222.4 337.6c-28.7 0-52.2-26.5-52.2-59.1s23.1-59.1 52.2-59.1 52.6 26.5 52.2 59.1c0 32.6-23.1 59.1-52.2 59.1zm195.2 0c-28.7 0-52.2-26.5-52.2-59.1s23.1-59.1 52.2-59.1 52.6 26.5 52.2 59.1c0 32.6-23.1 59.1-52.2 59.1z"/>
+      </svg>
       <span class="discord-text">moshumanzu</span>
     </span>
-  
-
-  <script>
-    // Wait until the DOM is fully loaded
-    document.addEventListener("DOMContentLoaded", () => {
-      const discord = document.getElementById('discord');
-
-      discord.addEventListener('click', () => {
-        discord.classList.toggle('show-text');
-      });
-    });
-
-    const socialsWithDiscord = document.querySelectorAll('.socials a, .discord');
-
-    socialsWithDiscord.forEach(icon => {
-    icon.addEventListener('mouseenter', (e) => {
-        for(let i=0; i<5; i++){
-        const spark = document.createElement('div');
-        spark.className = 'spark';
-        spark.style.setProperty('--dx', `${Math.random()*20-10}px`);
-        spark.style.setProperty('--dy', `${Math.random()*20-10}px`);
-        icon.appendChild(spark);
-        setTimeout(() => spark.remove(), 600);
-        }
-    });
-    });
-
-
-  </script>
 
   </div>
 
 
+<div class="tab-content">
+    <!-- TOGGLE BUTTONS -->
+  <div class="toggle-tabs">
+    <button class="tab active" data-target="beauty">Beauty</button>
+    <button class="tab" data-target="gaming">Gaming</button>
+  </div>
+
 <!-- BEAUTY / CREATOR -->
-<section id="beauty" class="section">
+<section id="beauty" class="section tab-panel active">
   <h2>Creator Codes</h2>
 
   <div class="beautycards">
-    <div class="card highlight">
     <div class="beautycard" data-bg="yesstyle.jpg">
       <h3>YesStyle</h3>
       <a href="https://www.yesstyle.com/en/home.html?rco=MOSHU87000&utm_term=MOSHU87000&utm_medium=Influencer&utm_source=dynamic&mcg=influencer" class="button">Code: MOSHU87000</a>
       <a href="https://www.yesstyle.com/en/influencers.html?irirco=MOSHU87000&utm_term=MOSHU87000&utm_medium=infreferral&mcg=influencer&utm_source=influencer&utm_campaign=iriprivate" class="button">Be a YesStyle Influencer ✨</a>
-    </div>
     </div>
 
     <div class="beautycard" data-bg="flowerknows.jpg">
@@ -193,7 +112,7 @@ window.addEventListener('resize', () => {
 
 
 <!-- GAMING -->
-<section id="gaming" class="section">
+<section id="gaming" class="section tab-panel">
   <h2>Gaming Profiles</h2>
 
   <div class="gamecards">
@@ -251,29 +170,34 @@ window.addEventListener('resize', () => {
       <p><strong>Platform:</strong> PlayStation</p>
     </div>
 
+    <div class="gamecard" data-bg="ps.jpg">
+      <h3>PlayStation</h3>
+      <a 
+        href="https://psnprofiles.com/moshzmanzu"
+        class="button"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        moshzmanzu
+    </a>
+
+<br>
+
+    <a 
+        href="https://psnprofiles.com/umochz"
+        class="button"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        umoch
+    </a>
+    </div>
+
   </div>
 </section>
 
-<script>
-      document.querySelectorAll('.beautycard, .gamecard').forEach(card => {
-        const bg = card.dataset.bg;
-        if (bg) {
-          card.style.setProperty('--card-bg', `url(${bg})`);
-        }
+</div>
 
-        card.addEventListener('click', e => {
-          // allow buttons/links to still work
-          if (e.target.closest('a')) return;
-
-          // close others
-          document.querySelectorAll('.active').forEach(c => {
-            if (c !== card) c.classList.remove('active');
-          });
-
-          card.classList.toggle('active');
-        });
-      });
-    </script>
-
+<script src="script.js"></script>
 </body>
 </html>

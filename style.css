@@ -79,16 +79,16 @@ body {
 
 .tagline {
   margin: 0;
-  font-size: 1rem;      /* subheading size */
+  font-size: 1.5rem;      /* subheading size */
   color: #ff8ec7; /* base pink */
   opacity: 0.8;         /* softer */
   margin-top: 0.2rem;   /* small spacing to h1 */
   display: inline-block;
   background: linear-gradient(
     90deg,
-    #0b0b0b 0%,
-    #ff8e8e 50%,
-    #000000 100%
+    #ffffff 0%,
+    #ff8ec7 50%,
+    #ffffff 100%
   );
   background-size: 200% 100%;
   -webkit-background-clip: text;
@@ -307,16 +307,6 @@ body {
     border-radius: 16px;
 }
 
-.card.highlight {
-  border: 2px solid var(--accent);
-  border-radius: 16px;
-  animation: pulse-border 2s infinite alternate;
-}
-@keyframes pulse-border {
-    0% { box-shadow: 0 0 5px var(--accent); }
-    100% { box-shadow: 0 0 15px var(--accent); }
-}
-
 .gamecards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -332,6 +322,8 @@ body {
 
 .beautycard,
 .gamecard {
+  position: relative;
+  overflow: hidden;
   transition:
     transform 0.35s ease,
     box-shadow 0.35s ease;
@@ -340,7 +332,7 @@ body {
     font-size: 0.95rem;
 }
 
-/* background image layer */
+/* background image */
 .beautycard::before,
 .gamecard::before {
   content: "";
@@ -349,17 +341,24 @@ body {
   background-image: var(--card-bg);
   background-size: cover;
   background-position: center;
-  opacity: 0;
-  filter: brightness(0.4) blur(2px);
-  transition: opacity 0.35s ease;
-  z-index: -1;
+  opacity: 1;
+  filter: brightness(0.6) blur(2px);
+  transition: 0.35s ease;
+  z-index: 0;
   border-radius: 16px; /* keep rounded corners */
+}
+
+.beautycard > *,
+.gamecard > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* hover (desktop) */
 .beautycard:hover::before,
 .gamecard:hover::before {
-  opacity: 1;
+  opacity: 1; /* stays visible */
+  filter: brightness(0.8) blur(0px); /* clearer + brighter */
 }
 
 /* hover lift */
@@ -369,12 +368,6 @@ body {
 .gamecard.active {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 18px 40px rgba(255, 142, 199, 0.18);
-}
-
-/* active (mobile tap) */
-.beautycard.active::before,
-.gamecard.active::before {
-  opacity: 1;
 }
 
 .beautycard h3,
@@ -389,8 +382,6 @@ body {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 18px 40px rgba(255, 142, 199, 0.18);
 }
-
-
 
 
 
@@ -435,12 +426,14 @@ body {
       box-shadow 0.25s ease;
 }
 
-.button:hover {
+.button:hover,
+.button-no-texttransform:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(255, 142, 199, 0.4);
 }
 
-.button::after {
+.button::after,
+.button-no-texttransform::after {
   content: "";
   position: absolute;
   top: 0;
@@ -456,7 +449,8 @@ body {
   pointer-events: none;
 }
 
-.button:hover::after {
+.button:hover::after,
+.button-no-texttransform:hover::after {
   animation: button-shine 0.6s ease;
 }
 
@@ -468,6 +462,54 @@ body {
   .button::after {
     animation: button-shine 2.8s ease-in-out infinite;
   }
+}
+
+/* hide inactive sections */
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+/* toggle buttons */
+.toggle-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.tab {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  background: linear-gradient(
+    175deg,
+    rgba(255,60,60,0.03),
+    rgba(0, 0, 0, 0)
+  );
+
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 142, 199, 0.05);
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 1rem;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.tab:hover {
+  transform: scale(1.05);
+}
+
+.tab.active {
+  background: rgba(255, 140, 199, 0.6);
+  box-shadow: 0 0 10px rgba(255,140,199,0.6);
 }
 
 
